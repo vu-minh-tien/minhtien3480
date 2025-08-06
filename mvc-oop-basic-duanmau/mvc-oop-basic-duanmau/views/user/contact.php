@@ -1,3 +1,6 @@
+
+<?php require_once 'views/layouts/headerr.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,3 +12,4 @@
     
 </body>
 </html>
+<?php require_once 'views/layouts/footer.php'; ?>

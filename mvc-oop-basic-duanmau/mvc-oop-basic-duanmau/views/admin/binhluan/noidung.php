@@ -1,6 +1,3 @@
-
-<?php require_once 'views/layouts/headerr.php'; ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <?php  require_once __DIR__ . '/../header.php';?>
+    <h1>nọi dung quản lý bình luận</h1>
 </body>
 </html>
-<?php require_once 'views/layouts/footer.php'; ?>
