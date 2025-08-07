@@ -1,3 +1,4 @@
+<?php  require_once __DIR__ . '/../header.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,53 +6,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
      <style>
-    body{
-        margin:0 auto;
-        width:1200px;
-
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
-    main{
-        margin-left:260px;
-        background-color:	#f5f5f5; /* hồng pastel */
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f5f5f5;
         color: #333;
-        font-family: 'Segoe UI', sans-serif;    
-        padding-bottom:100px;
     }
 
-    input {
-        margin-top:20px;
-        width:400px;
-        height:30px;
-        border-radius: 10px;
+    main {
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+    display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    button{
-        margin-right:150px;
-        background-color: rgb(217, 28, 217);
-        border-radius: 10px;
-        height:30px;
-        width:90px;
-        margin:20px;
-        border:none;
-        color:white;
-    }
-    button:hover{
-        background-color: rgba(191, 45, 191, 1);
-    }
-    td a{
-        border:none;    
-        margin:20px;
-        color:black;
-        margin-left:1px;
-        border-radius: 10px;
-        padding: 3px;
-        margin-left:15px;
+    h1 {
+        font-size: 28px;
+        margin-bottom: 30px;
+        color: #d91c1c;
+        text-align: center;
     }
 
-     </style>
+    table {
+        width: 100%;
+    }
+
+    th {
+        text-align: left;
+        padding: 10px 0;
+        width: 150px;
+        vertical-align: top;
+    }
+
+    td {
+        padding: 10px 0;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    select {
+        /* width: 100%; */
+        width: 400px;
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        background-color: #fff;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus,
+    select:focus {
+        border-color: #d91c1c;
+        outline: none;
+        box-shadow: 0 0 6px rgba(217, 28, 28, 0.3);
+    }
+
+    button {
+        padding: 10px 25px;
+        background-color: rgba(224, 14, 14, 1);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #a81414;
+    }
+
+    td a {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #ccc;
+        color: black;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-right: 10px;
+        transition: background-color 0.3s;
+    }
+
+    td a:hover {
+        background-color: #aaa;
+    }
+
+    span {
+        display: block;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    span[style*="color:red"] {
+        color: red !important;
+    }
+
+    span[style*="color:green"] {
+        color: green !important;
+    }
+</style>
+
 </head>
 <body>
-    <?php  require_once __DIR__ . '/../header.php';?>
+   
     <main>
 <h1>Trang Create sản phẩm</h1>
 <form action="" method="post" enctype="multipart/form-data">
@@ -68,7 +136,7 @@
         <tr>
             <th>loại</th>
             <td>
-                <select name="category_id" id="">
+                <select name="idcategory" id="">
                     <option value="">chọn danh mục</option>
                     <?php
                     foreach($danhsach as $tt){
@@ -94,7 +162,7 @@
         </tr>
         <tr>
             <th>Miêu tả</th>
-            <td><input type="text" name="description" ></td>
+            <td><input type="text" name="descripsion" ></td>
         </tr>
         <tr>
             <th>Số lượng</th>
@@ -102,7 +170,7 @@
         </tr>
 
         <tr>
-            <td><a href="?act=<?='quanly_sanpham'?>">quay lại</a></td>
+            <td><a href="?act=<?='sanpham'?>">quay lại</a></td>
             <td><button  type="submit" name="create_sanpham">Tạo</button></td>
         </tr>
 

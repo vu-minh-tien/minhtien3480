@@ -2,7 +2,7 @@
     require_once __DIR__ . '/../models/ProductModel.php';
     require_once __DIR__ . '/../models/User.php';
     require_once __DIR__ . '/../models/CommentModel.php';
-    require_once __DIR__ . '/../models/CategoryModer.php';
+    require_once __DIR__ . '/../models/CategoryModel.php';
     class ProductController {
         public $productModel;
         public $userModel;
@@ -80,12 +80,12 @@ public function trangchu(){
                     break;
             
            }
-            $danhsach_sp = $this->productModel->all_product_user($sql);
+            $danhsach_sp = $this->productModel->all($sql);
             if(empty($danhsach_sp)){
                 $thongbao="không có sản phẩm nào";
             }
 
-            include "views/user/trangsp.php";
+            include "views/user/product.php";
         }
 
         public function lien_he(){

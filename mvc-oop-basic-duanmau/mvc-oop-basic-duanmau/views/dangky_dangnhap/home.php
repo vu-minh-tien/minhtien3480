@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Trang điều hướng</h1>
-    <a href="?act=trangchu_user">Trang web</a><br>
+    <h1>home</h1>
+    <a href="?act=trangchu">Trang web</a><br>
     <a href="?act=dangnhap">Đăng nhập đăng ký_đăng nhập tài khoản admin</a>
 </body>
 </html>

@@ -56,10 +56,6 @@
             transition: all 0.3s ease;
         }
 
-        button:hover {
-            background: rgba(161, 36, 161, 1);
-        }
-
         span {
             color: red;
             display: block;

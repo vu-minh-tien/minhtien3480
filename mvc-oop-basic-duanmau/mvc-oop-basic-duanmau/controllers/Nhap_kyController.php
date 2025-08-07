@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../models/ProductModel.php';
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../models/CommentModel.php';
-require_once __DIR__ . '/../models/CategoryModer.php';
+require_once __DIR__ . '/../models/CategoryModel.php';
 class Nhap_kyController {
     public $productModel;
     public $userModel;
@@ -17,7 +17,7 @@ class Nhap_kyController {
     }
 
     public function home(){
-        include "views/user/trangchu.php";
+        include "views/dangky_dangnhap/home.php";
     }
 
     public function dangnhap(){
@@ -40,11 +40,11 @@ class Nhap_kyController {
                 ];
 
                     if($role ===0){
-                        header("Location: ?act=trangchu_admin");
+                        header("Location: ?act=trangchu_admin.php");
                         exit;
                     }
                     elseif($role ===1){
-                        header("Location: ?act=trangchu");
+                        header("Location: ?act=trangchu.php");
                         exit;
                     }
                 } 
@@ -71,7 +71,7 @@ class Nhap_kyController {
             $user->role=(int)1;
 
 
-            if(empty($user->name)===""||empty($user->address)===""||empty($user->number)===""||empty($user->password)==="" ||empty($user->email)===""){
+            if(empty($user->name) || empty($user->address) || empty($user->number) || empty($user->password) || empty($user->email)){
                 $loi="kiểm tra lại các trường giữ liệu";
             }
             else{

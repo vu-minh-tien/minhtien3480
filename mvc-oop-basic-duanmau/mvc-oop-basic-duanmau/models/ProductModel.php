@@ -28,7 +28,7 @@ class ProductModel {
                     $product->image       = $value['image'];
                     $product->price       = $value['price'];
                     $product->idcategory = $value['idcategory'];
-                    $product->description = $value['description'];
+                    $product->descripsion = $value['descripsion'];
                     $product->hot         = $value['hot'];
                     $product->discount    = $value['discount'];
                     $product->quantity    = $value['quantity'];
@@ -51,7 +51,7 @@ public function find($id){
                     $product->image       = $data['image'];
                     $product->price       = $data['price'];
                     $product->idcategory = $data['idcategory'];
-                    $product->description = $data['description'];
+                    $product->descripsion = $data['descripsion'];
                     $product->hot         = $data['hot'];
                     $product->discount    = $data['discount'];
                     $product->quantity    = $data['quantity'];
@@ -78,7 +78,7 @@ public function find($id){
             $product->image       = $data['image'];
             $product->price       = $data['price'];
             $product->idcategory  = $data['idcategory'];
-            $product->description = $data['description'];
+            $product->descripsion = $data['descripsion'];
             $product->hot         = $data['hot'];
             $product->discount    = $data['discount'];
             $product->quantity    = $data['quantity'];
@@ -95,8 +95,8 @@ public function find($id){
 
         public function create(Product $product){        
             try{
-                $sql="INSERT INTO `product` (`id`, `name`, `image`, `price`, `idcategory`, `description`, `hot`, `discount`, `quantity`)
-                 VALUES (NULL, '".$product->name."', '".$product->image."', '".$product->price."', '".$product->idcategory."', '".$product->description."', '".$product->hot."','".$product->discount."','".$product->quantity."');";
+                $sql="INSERT INTO `product` (`id`, `name`, `image`, `price`, `idcategory`, `descripsion`, `hot`, `discount`, `quantity`)
+                 VALUES (NULL, '".$product->name."', '".$product->image."', '".$product->price."', '".$product->idcategory."', '".$product->descripsion."', '".$product->hot."','".$product->discount."','".$product->quantity."');";
                 $data=$this->conn->exec($sql);
                 return $data;
             }catch (PDOException $err) {
@@ -119,7 +119,7 @@ public function find($id){
         public function update(Product $product){                 
             try{
                 $id=(int)$product->id;
-                $sql="UPDATE `product` SET , `name` = '".$product->name."',`image` = '".$product->image."', `price` = '".$product->price."', `idcategory` = '".$product->idcategory."', `description` = '".$product->description."', `hot` = '".$product->hot."', `discount` = '".$product->discount."', `quantity` = '".$product->quantity."' WHERE `product`.`id` = $id;";
+                $sql="UPDATE `product` SET , `name` = '".$product->name."',`image` = '".$product->image."', `price` = '".$product->price."', `idcategory` = '".$product->idcategory."', `descripsion` = '".$product->descripsion."', `hot` = '".$product->hot."', `discount` = '".$product->discount."', `quantity` = '".$product->quantity."' WHERE `product`.`id` = $id;";
                 $data=$this->conn->exec($sql);
                 return $data;
 
@@ -140,7 +140,7 @@ public function find($id){
                     $product->image       = $value['image'];
                     $product->price       = $value['price'];
                     $product->idcategory = $value['idcategory'];
-                    $product->description = $value['description'];
+                    $product->descripsion = $value['descripsion'];
                     $product->hot         = $value['hot'];
                     $product->discount    = $value['discount'];
                     $product->quantity    = $value['quantity'];
@@ -165,7 +165,7 @@ public function find($id){
                     $product->image       = $value['image'];
                     $product->price       = $value['price'];
                     $product->idcategory = $value['idcategory'];
-                    $product->description = $value['description'];
+                    $product->descripsion = $value['descripsion'];
                     $product->hot         = $value['hot'];
                     $product->discount    = $value['discount'];
                     $product->quantity    = $value['quantity'];
@@ -190,7 +190,7 @@ public function find($id){
                     $product->image       = $value['image'];
                     $product->price       = $value['price'];
                     $product->idcategory = $value['idcategory'];
-                    $product->description = $value['description'];
+                    $product->descripsion = $value['descripsion'];
                     $product->hot         = $value['hot'];
                     $product->discount    = $value['discount'];
                     $product->quantity    = $value['quantity'];
@@ -214,7 +214,7 @@ public function find($id){
                     $product->image       = $value['image'];
                     $product->price       = $value['price'];
                     $product->idcategory = $value['idcategory'];
-                    $product->description = $value['description'];
+                    $product->descripsion = $value['descripsion'];
                     $product->hot         = $value['hot'];
                     $product->discount    = $value['discount'];
                     $product->quantity    = $value['quantity'];

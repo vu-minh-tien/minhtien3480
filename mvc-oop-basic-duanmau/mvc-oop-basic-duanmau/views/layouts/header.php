@@ -1,3 +1,18 @@
+<?php  
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$nameUser = $_SESSION['user']['name'] ?? '';
+?>
+<form action="" method="post">
+        <?php if(!empty($_SESSION['user']['name'])): ?>
+            <a style="text-decoration: none;" href="?act=dangxuat">Đăng xuất</a>
+            <?php else :?>
+            <a style="text-decoration: none;" href="?act=dangnhap">Đăng nhập</a>
+                <?php endif;
+            ?>
+      </form>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -34,11 +49,11 @@
 
         <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
             <ul class="navbar-nav center-menu">
-                <li class="nav-item"><a class="nav-link" href="?act=home">Trang chủ</a></li>
-                <li class="nav-item"><a class="nav-link" href="?act=products">Sản phẩm</a></li>
+                <li class="nav-item"><a class="nav-link" href="?act=trangchu">Trang chủ</a></li>
+                <li class="nav-item"><a class="nav-link" href="?act=product">Sản phẩm</a></li>
                 <li class="nav-item"><a class="nav-link" href="?act=about">Giới thiệu</a></li>
                 <li class="nav-item"><a class="nav-link" href="?act=contact">Liên hệ</a></li>
-                <li class="nav-item"><a class="nav-link" href="?act=login">Đăng nhập</a></li>
+                <li class="nav-item"><a class="nav-link" href="?act=dangnhap">Đăng nhập</a></li>
             </ul>
             <form class="d-flex search-form" action="?act=search" method="GET">
                 <input class="form-control me-2" type="search" name="keyword" placeholder="Tìm kiếm..." aria-label="Search">

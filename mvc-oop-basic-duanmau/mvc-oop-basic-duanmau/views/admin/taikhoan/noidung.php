@@ -5,106 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body{
-        margin:0 auto;
-        width:1200px;
-        }
-        .content{
-            margin-left:300px;  
-        }
-        /* Reset và font mặc định */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f5f6fa;
-            color: #333;
-        }   
+    
 
-        /* Container chính */
-        .content {
-            width: 800px;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+    body {
+        width: 100%;
+        /* max-width: 1200px; */
+    
+        font-family: Arial, sans-serif;
+        background-color: #f5f6fa;
+        color: #333;
+        /* padding: 30px 15px; */
+    }
 
-        /* Tiêu đề trang */
-        .content h1 {
-            color: #2c3e50;
-        }
+    /* Khối nội dung chính */
+    .content {
+        width: 100%;
+        /* max-width: 900px; */
+        background-color: #fff;
+        /* margin: 0 auto; */
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-        /* Form tìm kiếm */
-        form {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .content h1 {
+        font-size: 28px;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
 
-        form input[type="text"] {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            flex: 1;
-        }
+    /* Form tìm kiếm */
+    form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        align-items: center;
+    }
 
-        form button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color:rgb(217, 28, 217);
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-        }
+    form input[type="text"] {
+        flex: 1;
+        padding: 10px 15px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
 
-        form button:hover {
-            background-color: rgba(194, 64, 194, 1);
-        }
+    form button {
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: none;
+        background-color: #d91c1c;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-        /* Bảng dữ liệu */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-        }
+    form button:hover {
+        background-color: #b71616;
+    }
 
-        table th, table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
+    span {
+        font-weight: bold;
+        color: red;
+        margin-left: 10px;
+    }
 
-        table th {
-            background-color: #ecf0f1;
-            color: #2c3e50;
-            font-weight: bold;
-        }
+    /* Bảng dữ liệu */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
 
-        table tr:hover {
-            background-color: #f1f1f1;
-        }
+    table th, table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
 
-        /* Hành động */
-        table td a {
-            text-decoration: none;
-            color: #2980b9;
-            margin-right: 10px;
-        }
+    table th {
+        background-color: #ecf0f1;
+        color: #2c3e50;
+        font-weight: bold;
+    }
 
-        table td a:hover {
-            text-decoration: underline;
-            color: #1c5980;
-        }
+    table tr:hover {
+        background-color: #f1f1f1;
+    }
 
-        /* Thông báo lỗi */
-        span {
-            font-weight: bold;
-        }
-    </style>
+    table td a {
+        text-decoration: none;
+        color: #2980b9;
+        margin-right: 10px;
+        transition: color 0.2s ease;
+    }
+
+    table td a:hover {
+        text-decoration: underline;
+        color: #1c5980;
+    }
+</style>
 </head>
 <body>
     <?php  require_once __DIR__ . '/../header.php';?>

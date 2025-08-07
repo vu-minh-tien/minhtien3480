@@ -1,6 +1,6 @@
 
 
-<?php require_once 'views/layouts/headerr.php'; ?>
+<?php require_once 'views/layouts/header.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">

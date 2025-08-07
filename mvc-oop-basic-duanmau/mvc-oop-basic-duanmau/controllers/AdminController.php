@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../models/ProductModel.php';
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../models/CommentModel.php';
-require_once __DIR__ . '/../models/CategoryModer.php';
+require_once __DIR__ . '/../models/CategoryModel.php';
 
 class AdminController {
     public $productModel;
@@ -48,13 +48,21 @@ class AdminController {
 
         include "views/admin/danhmuc/noidung.php";
     }
+public function create_danhmuc() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name = $_POST['name'];
+        $this->cate->create_danhmuc($name);
+        header('Location: index.php?url=quanly_danhmuc');
+        exit;
+    }
 
+    include './views/admin/danhmuc/create.php';
+}
     public function delete_danhmuc($id) {
         $danhmuc = $this->categoryModel->find($id);
         $thongbao = "";
         $loi = "";
         $thanhcong = "";
-
         if (!$danhmuc) {
             $thongbao = "Danh mục không tồn tại!";
         } else if ($danhmuc->sum > 0) {
@@ -124,7 +132,7 @@ class AdminController {
 
     public function quanly_sanpham() {
         $err = "";
-        $danhsach = $this->productModel->all();
+        $danhsach= $this->productModel->all();
 
         if (isset($_POST['tim'])) {
             $tukhoa = $_POST['tukhoa'];
@@ -165,10 +173,10 @@ class AdminController {
                     $sanpham->image = str_replace('uploads/', '', $uploadPath);
                 }
             }
-
+      
             $sanpham->price = $_POST['price'];
-            $sanpham->idcategory = $_POST['idcategory'];
-            $sanpham->description = $_POST['description'];
+             $sanpham->idcategory = $_POST['idcategory'];
+            $sanpham->descripsion = $_POST['descripsion'];
             $sanpham->hot = $_POST['hot'];
             $sanpham->discount = $_POST['discount'];
             $sanpham->quantity = $_POST['quantity'];
@@ -226,7 +234,7 @@ public function update_sanpham($id) {
         }
         $sanpham->price       = $_POST['price'];
         $sanpham->idcategory  = $_POST['idcategory'];
-        $sanpham->description = $_POST['description'];
+        $sanpham->descripsion = $_POST['descripsion'];
         $sanpham->hot         = $_POST['hot'];
         $sanpham->discount    = $_POST['discount'];
         $sanpham->quantity    = $_POST['quantity'];

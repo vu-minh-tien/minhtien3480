@@ -2,50 +2,91 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
 // Xử lý đăng xuất
 if (isset($_GET['act']) && $_GET['act'] === 'dangxuat') {
     session_destroy();
-    header("Location: ?act=dangxuat");
+    header("Location: ?act=dangnhap");
     exit;
 }
+
 $currentPage = $_GET['act'] ?? 'trangchu_admin';
 $page = $_GET['page'] ?? 'dashboard'; 
-
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <style>
-        .menu{
-            background-color:rgba(121, 46, 121, 1);
+    <title>Admin Header</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        h1{
-            margin:0px;
+        body {
+            font-family: Arial, sans-serif;
         }
-        
-     </style>
+        .menu {
+            height: 60px;
+            background-color: rgba(28, 170, 235, 1);
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            color: white;
+            justify-content: space-between;
+        }
+        .menu .left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .menu li {
+            list-style: none;
+            display: inline-block;
+        }
+        .menu a {
+            text-decoration: none;
+            color: white;
+            padding: 8px 12px;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+        }
+        .menu a:hover,
+        .menu a.active {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .anh img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
-    
     <div class="menu">
- <?= $_SESSION['admin']?> 
+        <?= $_SESSION['admin']?> 
   <div class="anh">
     <a href="">
     <a href="?act=thongtin_admin"><img src="" alt="avatar"></a>
 </a>
     
   </div>
-        <li><a href="?act=<?='trangchu_admin'?>"  class="<?=$currentPage == 'trangchu_admin' ?'active':''?>">Trang chủ</a></li>
-        <li><a href="?act=<?='danhmuc'?>"  class="<?=$currentPage == 'danhmuc' ?'active':''?>">Quản lý danh mục</a></li>
-        <li><a href="?act=<?='sanpham'?>"  class="<?=$currentPage == 'sanpham' ?'active':''?>">Quản lý sản phẩm</a></li>
-        <li><a href="?act=<?='taikhoan'?>" class="<?=$currentPage == 'taikhoan' ?'active':''?>">Quản lý tài khoản</a></li>
-        <li><a href="?act=<?='binhluan'?>" class="<?=$currentPage == 'binhluan' ?'active':''?>">Quản lý bình luận</a></li>
-        <li><a href="?act=<?='dangxuat'?>" name="dangxuat" onclick="return confirm('Bạn có chắc là muốn đăng xuất không?')" class="<?=$currentPage == 'dangxuat' ?'active':''?>">Đăng xuất</a></li>
-        
+        <div class="left">
+            <strong><?= isset($_SESSION['admin']) ? $_SESSION['admin'] : 'Admin' ?></strong>
+            <li><a href="?act=trangchu_admin" class="<?= $currentPage == 'trangchu_admin' ? 'active' : '' ?>">Trang chủ</a></li>
+            <li><a href="?act=danhmuc" class="<?= $currentPage == 'danhmuc' ? 'active' : '' ?>">Quản lý danh mục</a></li>
+            <li><a href="?act=sanpham" class="<?= $currentPage == 'sanpham' ? 'active' : '' ?>">Quản lý sản phẩm</a></li>
+            <li><a href="?act=taikhoan" class="<?= $currentPage == 'taikhoan' ? 'active' : '' ?>">Quản lý tài khoản</a></li>
+            <li><a href="?act=binhluan" class="<?= $currentPage == 'binhluan' ? 'active' : '' ?>">Quản lý bình luận</a></li>
+            <li><a href="?act=dangxuat" onclick="return confirm('Bạn có chắc là muốn đăng xuất không?')" class="<?= $currentPage == 'dangxuat' ? 'active' : '' ?>">Đăng xuất</a></li>
+        </div>
+        <div class="anh">
+            <a href="?act=thongtin_admin">
+                <img src="0.png" alt="avatar">
+            </a>
+        </div>
     </div>
-
 </body>
 </html>
