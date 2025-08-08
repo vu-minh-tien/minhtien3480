@@ -24,7 +24,6 @@ class Nhap_kyController {
         session_start();
         $loi="";
         $dulieu_taikhoan = $this->userModel->all();
-
         if(isset($_POST['dangnhap'])){
             $email    = trim($_POST['email']);
             $password = trim($_POST['password']);
@@ -38,13 +37,12 @@ class Nhap_kyController {
                     'id'   => $tt->id,
                     'name' => $tt->name,
                 ];
-
-                    if($role ===0){
-                        header("Location: ?act=trangchu_admin.php");
+                    if($role ==0){
+                        header("Location:?act=trangchu_admin");
                         exit;
                     }
-                    elseif($role ===1){
-                        header("Location: ?act=trangchu.php");
+                    elseif($role ==1){
+                        header("Location:?act=trangchu");
                         exit;
                     }
                 } 
@@ -91,7 +89,7 @@ class Nhap_kyController {
     public function dangxuat(){
         session_start();
         session_destroy();
-        header("Location: ?act=/"); 
+        header("Location: ?act=dangnhap"); 
         exit;
     }
 }

@@ -65,12 +65,12 @@ public function find($id){
 
             public function find_loai($loai) {
     try {
-       $sql = "SELECT * FROM `product` WHERE category_id = :loai";
+       $sql = "SELECT * FROM `product` WHERE idcategory = :loai";
                     $stmt = $this->conn->prepare($sql);
                     $stmt->execute([':loai' => $loai]);
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $dsproduct = [];
+        $danhsachproduct = [];
         foreach ($result as $data) {
             $product = new Product();
             $product->id          = $data['id'];
@@ -83,10 +83,10 @@ public function find($id){
             $product->discount    = $data['discount'];
             $product->quantity    = $data['quantity'];
 
-            $dsproduct[] = $product;
+            $danhsachproduct[] = $product;
         }
 
-        return $dsproduct;
+        return $danhsachproduct;
 
     } catch (PDOException $err) {
        echo "Lỗi : " . $err->getMessage();
@@ -105,21 +105,31 @@ public function find($id){
         }
 
 
-        public function deleteproduct($id){                               
-            try{
-                $sql="DELETE FROM product WHERE `product`.`id` = $id";
-                $data=$this->conn->exec($sql);
-                return $data;
+        public function delete_sanpham($id) {
+    try {
+        // Xóa comment liên quan
+        $sql = "DELETE FROM comment WHERE idproduct = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
 
-            }catch (PDOException $err) {
-            echo "Lỗi : " . $err->getMessage();
-        }
-        }
+        // Xóa sản phẩm
+        $sql = "DELETE FROM product WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return true; // báo thành công
+    } catch (PDOException $err) {
+        echo "Lỗi : " . $err->getMessage();
+        return false; // báo thất bại
+    }
+}
 
         public function update(Product $product){                 
             try{
                 $id=(int)$product->id;
-                $sql="UPDATE `product` SET , `name` = '".$product->name."',`image` = '".$product->image."', `price` = '".$product->price."', `idcategory` = '".$product->idcategory."', `descripsion` = '".$product->descripsion."', `hot` = '".$product->hot."', `discount` = '".$product->discount."', `quantity` = '".$product->quantity."' WHERE `product`.`id` = $id;";
+                $sql="UPDATE `product` SET  `name` = '".$product->name."',`image` = '".$product->image."', `price` = '".$product->price."', `idcategory` = '".$product->idcategory."', `descripsion` = '".$product->descripsion."', `hot` = '".$product->hot."', `discount` = '".$product->discount."', `quantity` = '".$product->quantity."' WHERE `product`.`id` = $id;";
                 $data=$this->conn->exec($sql);
                 return $data;
 
@@ -132,7 +142,7 @@ public function find($id){
             try{
                 $sql="SELECT * FROM `product` Where `hot` = 1 LIMIT 8";
                 $data=$this->conn->query($sql)->fetchAll();
-                $dsproduct=[];
+                $danhsachproduct=[];
                 foreach($data as $value){
                      $product = new Product();
                     $product->id        =$value['id'];
@@ -144,9 +154,9 @@ public function find($id){
                     $product->hot         = $value['hot'];
                     $product->discount    = $value['discount'];
                     $product->quantity    = $value['quantity'];
-                    $dsproduct[]=$product;
+                    $danhsachproduct[]=$product;
                 }
-                return $dsproduct;
+                return $danhsachproduct;
 
             }catch (PDOException $err) {
             echo "Lỗi : " . $err->getMessage();
@@ -157,7 +167,7 @@ public function find($id){
             try{
                 $sql="SELECT * FROM `product` Where `hot` = 2 LIMIT 8";
                 $data=$this->conn->query($sql)->fetchAll();
-                $dsproduct=[];
+                $danhsachproduct=[];
                 foreach($data as $value){
                      $product = new Product();
                     $product->id        =$value['id'];
@@ -169,9 +179,9 @@ public function find($id){
                     $product->hot         = $value['hot'];
                     $product->discount    = $value['discount'];
                     $product->quantity    = $value['quantity'];
-                    $dsproduct[]=$product;
+                    $danhsachproduct[]=$product;
                 }
-                return $dsproduct;
+                return $danhsachproduct;
 
             }catch (PDOException $err) {
             echo "Lỗi: " . $err->getMessage();
@@ -182,7 +192,7 @@ public function find($id){
             try{
                 $sql="SELECT * FROM `product` Where `hot` = 3 LIMIT 8";
                 $data=$this->conn->query($sql)->fetchAll();
-                $dsproduct=[];
+                $danhsachproduct=[];
                 foreach($data as $value){
                      $product = new Product();
                     $product->id           =$value['id'];
@@ -194,9 +204,9 @@ public function find($id){
                     $product->hot         = $value['hot'];
                     $product->discount    = $value['discount'];
                     $product->quantity    = $value['quantity'];
-                    $dsproduct[]=$product;
+                    $danhsachproduct[]=$product;
                 }
-                return $dsproduct;
+                return $danhsachproduct;
 
             }catch (PDOException $err) {
             echo "Lỗi : " . $err->getMessage();
@@ -206,7 +216,7 @@ public function find($id){
         public function all_productuser($sql){
             try{
                 $data=$this->conn->query($sql)->fetchAll();
-                $dsproduct=[];
+                $danhsachproduct=[];
                 foreach($data as $value){
                      $product = new Product();
                     $product->id          =$value['id'];
@@ -218,9 +228,9 @@ public function find($id){
                     $product->hot         = $value['hot'];
                     $product->discount    = $value['discount'];
                     $product->quantity    = $value['quantity'];
-                    $dsproduct[]=$product;
+                    $danhsachproduct[]=$product;
                 }
-                return $dsproduct;
+                return $danhsachproduct;
 
             }catch (PDOException $err) {
             echo "Lỗi : " . $err->getMessage();

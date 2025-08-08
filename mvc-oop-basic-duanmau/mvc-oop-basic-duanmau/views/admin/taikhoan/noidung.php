@@ -1,145 +1,148 @@
+<?php require_once __DIR__ . '/../header.php'; ?> 
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-    
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quản lý tài khoản</title>
+<style>
     body {
-        width: 100%;
-        /* max-width: 1200px; */
-    
         font-family: Arial, sans-serif;
-        background-color: #f5f6fa;
+        background: #f8f9fa;
+    }
+    .container {
+      
+       margin: 20px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
         color: #333;
-        /* padding: 30px 15px; */
     }
-
-    /* Khối nội dung chính */
-    .content {
-        width: 100%;
-        /* max-width: 900px; */
-        background-color: #fff;
-        /* margin: 0 auto; */
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .content h1 {
-        font-size: 28px;
-        color: #2c3e50;
+    form.search-form {
         margin-bottom: 20px;
-    }
-
-    /* Form tìm kiếm */
-    form {
         display: flex;
+        justify-content: center;
         gap: 10px;
-        margin-bottom: 20px;
-        align-items: center;
     }
-
-    form input[type="text"] {
-        flex: 1;
-        padding: 10px 15px;
-        border-radius: 20px;
+    form.search-form input[type="text"] {
+        width: 300px;
+        padding: 8px 10px;
+        border-radius: 4px;
         border: 1px solid #ccc;
-        font-size: 16px;
     }
-
-    form button {
-        padding: 10px 20px;
-        border-radius: 20px;
+    form.search-form button {
+        padding: 8px 16px;
         border: none;
-        background-color: #d91c1c;
-        color: #fff;
-        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 4px;
         cursor: pointer;
-        transition: background-color 0.3s ease;
     }
-
-    form button:hover {
-        background-color: #b71616;
+    form.search-form button:hover {
+        background-color: #0056b3;
     }
-
-    span {
-        font-weight: bold;
-        color: red;
-        margin-left: 10px;
-    }
-
-    /* Bảng dữ liệu */
     table {
         width: 100%;
         border-collapse: collapse;
-        background-color: #fff;
     }
-
+    table thead {
+        background-color: #007bff;
+        color: white;
+    }
     table th, table td {
-        padding: 12px 15px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
+        padding: 12px 10px;
+        border: 1px solid #ddd;
+        text-align: center;
     }
-
-    table th {
-        background-color: #ecf0f1;
-        color: #2c3e50;
-        font-weight: bold;
-    }
-
     table tr:hover {
         background-color: #f1f1f1;
     }
-
-    table td a {
+    a.btn-delete, a.btn-edit {
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
         text-decoration: none;
-        color: #2980b9;
-        margin-right: 10px;
-        transition: color 0.2s ease;
+        font-weight: bold;
+        margin: 0 3px;
+        display: inline-block;
     }
-
-    table td a:hover {
-        text-decoration: underline;
-        color: #1c5980;
+    a.btn-delete {
+        background-color: #dc3545;
+    }
+    a.btn-delete:hover {
+        background-color: #c82333;
+    }
+    a.btn-edit {
+        background-color: #28a745;
+    }
+    a.btn-edit:hover {
+        background-color: #218838;
+    }
+    .error-msg {
+        color: red;
+        text-align: center;
+        margin-bottom: 15px;
     }
 </style>
 </head>
 <body>
-    <?php  require_once __DIR__ . '/../header.php';?>
-    <div class="content">
-    <h1>Trang quản lý tài khoản</h1>
-            <form action=""method="post" enctype ="multipart/form-data">
-            <button type="submit" name="tim">Tìm</button> <input type="text" name="user" style="border-radius:20px;">
-            <span style="color:red;"> <?=$err?></span>
-        </form>
-    <table border="1">
+
+<div class="container">
+    <h2>Quản lý tài khoản</h2>
+
+    <!-- Form tìm kiếm -->
+    <form action="" method="post" class="search-form">
+        <input type="text" name="user" placeholder="Tìm theo email hoặc tên" value="<?php echo isset($_POST['user']) ? htmlspecialchars($_POST['user']) : ''; ?>">
+        <button type="submit" name="tim">Tìm kiếm</button>
+    </form>
+
+    <!-- Hiển thị lỗi nếu có -->
+    <?php if (!empty($err)): ?>
+        <div class="error-msg"><?php echo $err; ?></div>
+    <?php endif; ?>
+
+    <!-- Bảng danh sách tài khoản -->
+    <table>
+    <thead>
         <tr>
-            <th>Tên </th>
-            <th>email</th>
-            <th>Điện thoại</th>
-            <th>role</th>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>   <!-- Thêm cột này -->
+            <th>Mật khẩu</th>        <!-- Thêm cột này -->
+            <th>Quyền</th>
             <th>Hành động</th>
         </tr>
-        <?php
-        foreach($danhsach as $tt){
-            ?>
+    </thead>
+    <tbody>
+        <?php if (!empty($danhsach)): ?>
+            <?php foreach ($danhsach as $user): ?>
             <tr>
-                <td><?=$tt->name?></td>
-                <td><?=$tt->email?></td>
-                <td><?=$tt->number?></td>
-                <td><?=$tt->role?></td>
+                <td><?php echo htmlspecialchars($user->id); ?></td>
+                <td><?php echo htmlspecialchars($user->name); ?></td>
+                <td><?php echo htmlspecialchars($user->email); ?></td>
+                <td><?php echo htmlspecialchars($user->number ?? ''); ?></td> <!-- Số điện thoại -->
+                <td><?php echo htmlspecialchars($user->password ?? ''); ?></td> <!-- Mật khẩu -->
+                <td><?php echo htmlspecialchars($user->role ?? 'user'); ?></td>
                 <td>
-                    <a style="color:black;" href="">Xem chi tiết / </a>
-                    <a style="color:black;" href="">Khóa</a>
+                    <a href="?act=update_taikhoan&id=<?php echo $user->id; ?>" class="btn-edit">Sửa</a>
+                    <a href="?act=delete_taikhoan&id=<?php echo $user->id; ?>" class="btn-delete" onclick="return confirm('Bạn có chắc muốn xóa tài khoản này?');">Xóa</a>
                 </td>
             </tr>
-            <?php
-        }
-        ?>
-    </table>
-    </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr><td colspan="7" style="text-align:center;">Không có tài khoản nào</td></tr>
+        <?php endif; ?>
+    </tbody>
+</table>
+
+</div>
+
 </body>
 </html>

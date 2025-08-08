@@ -62,14 +62,26 @@ $page = $_GET['page'] ?? 'dashboard';
             border-radius: 50%;
             margin-left: 10px;
         }
+        .menu a.logout-btn {
+    background-color: #0451edff; /* đỏ */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 8px 14px;
+    transition: background-color 0.3s ease;
+}
+
+.menu a.logout-btn:hover {
+    background-color: #b02a37; /* đỏ đậm khi hover */
+    color: white;
+}
     </style>
 </head>
 <body>
     <div class="menu">
-        <?= $_SESSION['admin']?> 
   <div class="anh">
     <a href="">
-    <a href="?act=thongtin_admin"><img src="" alt="avatar"></a>
+    <a href="?act=thongtin_admin"><img src="uploads/img/logo.png" alt="avatar"></a>
 </a>
     
   </div>
@@ -80,13 +92,15 @@ $page = $_GET['page'] ?? 'dashboard';
             <li><a href="?act=sanpham" class="<?= $currentPage == 'sanpham' ? 'active' : '' ?>">Quản lý sản phẩm</a></li>
             <li><a href="?act=taikhoan" class="<?= $currentPage == 'taikhoan' ? 'active' : '' ?>">Quản lý tài khoản</a></li>
             <li><a href="?act=binhluan" class="<?= $currentPage == 'binhluan' ? 'active' : '' ?>">Quản lý bình luận</a></li>
-            <li><a href="?act=dangxuat" onclick="return confirm('Bạn có chắc là muốn đăng xuất không?')" class="<?= $currentPage == 'dangxuat' ? 'active' : '' ?>">Đăng xuất</a></li>
-        </div>
-        <div class="anh">
-            <a href="?act=thongtin_admin">
-                <img src="0.png" alt="avatar">
-            </a>
-        </div>
+           
+        </div> 
+        <li>
+    <a href="?act=dangxuat" 
+       onclick="return confirm('Bạn chắc là muốn đăng xuất?')" 
+       class="logout-btn <?= $currentPage == 'dangxuat' ? 'active' : '' ?>">
+       Đăng xuất
+    </a>
+</li>
     </div>
 </body>
 </html>

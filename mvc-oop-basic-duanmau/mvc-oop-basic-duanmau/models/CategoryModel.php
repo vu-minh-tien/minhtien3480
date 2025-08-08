@@ -73,7 +73,7 @@ public function delete_danhmuc($id){        //thêm danh mục
         }
         }
 
-        public function update_danhmuc(Category $danhmuc){        //sửa danh mục
+        public function update_danhmuc(Category $danhmuc){      
             try{
                 $id = (int)$danhmuc->id;
                 $sql="UPDATE `category` SET `name` = '".$danhmuc->name."' WHERE `category`.`id` = $id;";

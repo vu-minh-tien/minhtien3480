@@ -101,7 +101,7 @@ public function create_danhmuc() {
             }
         }
 
-        include "views/admin/danhmuc/update_danhmuc.php";
+        include "views/admin/danhmuc/update.php";
     }
 
     public function quanly_taikhoan() {
@@ -130,6 +130,75 @@ public function create_danhmuc() {
         include "views/admin/taikhoan/noidung.php";
     }
 
+public function update_taikhoan($id) {
+    $loi = "";
+    $thanhcong = "";
+    $user = $this->userModel->find($id);
+
+if (isset($_POST['update_user'])) {
+    $user->name = $_POST['name'] ?? $user->name;
+    $user->email = $_POST['email'] ?? $user->email;
+    $user->number = $_POST['number'] ?? $user->number; // chỉ dùng number thôi
+
+    $result = $this->userModel->update($user);
+
+    if ($result) {
+        // cập nhật thành công
+    } else {
+        // lỗi cập nhật
+    }
+}
+
+        if (isset($_POST['change_password'])) {
+            $password_old = $_POST['password_old'];
+            $password_new = $_POST['password_new'];
+            $password_confirm = $_POST['password_confirm'];
+
+            if (empty($password_old) || empty($password_new) || empty($password_confirm)) {
+                $loi = "Vui lòng nhập đầy đủ các trường mật khẩu";
+            } elseif ($password_new !== $password_confirm) {
+                $loi = "Mật khẩu mới và xác nhận mật khẩu không khớp";
+            } elseif (!password_verify($password_old, $user->password)) {
+                $loi = "Mật khẩu cũ không đúng";
+            } else {
+                // Mã hóa mật khẩu mới
+                $user->password = password_hash($password_new, PASSWORD_DEFAULT);
+                $ketqua = $this->userModel->update_password($user);
+                if ($ketqua) {
+                    $thanhcong = "Đổi mật khẩu thành công";
+                } else {
+                    $loi = "Đổi mật khẩu thất bại";
+                }
+            }
+        }
+         include "views/admin/taikhoan/update.php";
+    }
+
+   
+
+
+public function delete_taikhoan($id) {
+    try {
+        // Gọi model để xóa tài khoản theo id
+        $ketqua = $this->userModel->delete_user($id);
+
+        if ($ketqua) {
+            // Nếu xóa thành công, chuyển hướng về trang quản lý tài khoản
+            header("Location: ?act=quanly_taikhoan");
+            exit();
+        } else {
+            // Nếu xóa thất bại, có thể hiển thị lỗi hoặc thông báo
+            $err = "Không thể xóa tài khoản này.";
+            $danhsach = $this->userModel->all();
+            include "views/admin/taikhoan/noidung.php";
+        }
+    } catch (Exception $e) {
+        // Bắt lỗi ngoại lệ
+        $err = "Lỗi xóa tài khoản: " . $e->getMessage();
+        $danhsach = $this->userModel->all();
+        include "views/admin/taikhoan/noidung.php";
+    }
+}
     public function quanly_sanpham() {
         $err = "";
         $danhsach= $this->productModel->all();
@@ -185,7 +254,8 @@ public function create_danhmuc() {
                 $loi = "kiểm tra lại các trường giữ liệu";
             } else {
                 $ketqua_update = $this->productModel->create($sanpham);
-                if ($ketqua_update === 1) {
+                if ($ketqua_update) {
+                     header("Location: ?act=sanpham");
                     $thanhcong = "create sản phẩm thành công";
                 } else {
                     $loi = "create sản phẩm thất bại";
@@ -197,21 +267,73 @@ public function create_danhmuc() {
     }
 
     public function delete_sanpham($id) {                            
-        $ketqua = $this->productModel->delete_sanpham($id);
-        if ($ketqua === 1) {
-            header("Location: ?act=sanpham");
-            exit;
+    $ketqua = $this->productModel->delete_sanpham($id);
+    if ($ketqua) {
+        header("Location: ?act=sanpham&msg=Xóa thành công");
+        exit;
+    } else {
+        $loi = "Không thể xóa";
+        $danhsach = $this->productModel->all();
+        include "views/admin/sanpham/noidung.php";
+    }
+}
+
+    public function quanly_binhluan() {
+    $err = "";
+    $danhsach = [];
+
+    // Lấy tất cả bình luận kèm thông tin sản phẩm + user
+    try {
+        $sql = "SELECT cmt.*, pro.name AS ten_sanpham, user.name AS ten_user
+                FROM `comment` AS cmt
+                JOIN `product` AS pro ON cmt.idproduct = pro.id
+                JOIN `user` AS user ON cmt.iduser = user.id
+                ORDER BY cmt.date DESC";
+        $danhsach = $this->commentModel->conn->query($sql)->fetchAll();
+    } catch (PDOException $e) {
+        $err = "Lỗi truy vấn bình luận: " . $e->getMessage();
+    }
+
+    // Nếu tìm kiếm
+    if (isset($_POST['tim'])) {
+        $keyword = trim($_POST['tukhoa']);
+        if ($keyword == "") {
+            $err = "Vui lòng nhập từ khóa tìm kiếm";
         } else {
-            $loi = "không thể xóa";
-            $danhsach = $this->productModel->all();
-            include "views/admin/sanpham/noidung.php";
+            $ketqua = [];
+            foreach ($danhsach as $row) {
+                if (stripos($row['content'], $keyword) !== false || 
+                    stripos($row['ten_sanpham'], $keyword) !== false || 
+                    stripos($row['ten_user'], $keyword) !== false) {
+                    $ketqua[] = $row;
+                }
+            }
+            if (empty($ketqua)) {
+                $err = "Không tìm thấy bình luận phù hợp";
+                $danhsach = [];
+            } else {
+                $danhsach = $ketqua;
+            }
         }
     }
 
-    public function quanly_binhluan() {
-        include "views/admin/binhluan/noidung.php";
-    }
+    include "views/admin/binhluan/noidung.php";
+}
 
+public function delete_binhluan($id) {
+    try {
+        $sql = "DELETE FROM comment WHERE id = $id";
+        $ketqua = $this->commentModel->conn->exec($sql);
+        if ($ketqua > 0) {
+            header("Location: ?act=binhluan");
+            exit;
+        } else {
+            echo "Không thể xóa bình luận.";
+        }
+    } catch (PDOException $e) {
+        echo "Lỗi xóa bình luận: " . $e->getMessage();
+    }
+}
 
 public function update_sanpham($id) {
    

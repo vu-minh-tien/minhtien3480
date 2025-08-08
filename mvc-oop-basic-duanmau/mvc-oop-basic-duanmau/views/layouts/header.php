@@ -5,14 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $nameUser = $_SESSION['user']['name'] ?? '';
 ?>
-<form action="" method="post">
-        <?php if(!empty($_SESSION['user']['name'])): ?>
-            <a style="text-decoration: none;" href="?act=dangxuat">Đăng xuất</a>
-            <?php else :?>
-            <a style="text-decoration: none;" href="?act=dangnhap">Đăng nhập</a>
-                <?php endif;
-            ?>
-      </form>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -22,6 +15,21 @@ $nameUser = $_SESSION['user']['name'] ?? '';
 </head>
 <body>
    <style>
+    .navbar li a {
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hiệu ứng hover */
+.navbar li a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* nền trắng mờ */
+    color: #1181dcff; /* chữ vàng nhạt */
+}
     .navbar-light-blue {
         background-color: #a7d8ff; /* xanh nhạt */
     }
@@ -37,11 +45,49 @@ $nameUser = $_SESSION['user']['name'] ?? '';
     .center-menu {
         margin: 0 auto;
     }
+    .login-btn, .logout-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    margin-left: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.login-btn {
+    background-color: #0451edff; /* xanh lá */
+    color: white;
+}
+
+.login-btn:hover {
+    background-color: #218838;
+}
+
+.logout-btn {
+    background-color: #0451edff; /* đỏ */
+    color: white;
+}
+
+.logout-btn:hover {
+    background-color: #b02a37;
+}
+.anh img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-info px-4">
     <div class="container-fluid">
-        <a class="navbar-brand" href="?act=home">PolyShop</a>
+       <div class="anh">
+    <a href="">
+    <a href="?act=thongtin_admin"><img src="uploads/img/logo.png" alt="avatar"></a>
+</a>
+    
+  </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -53,12 +99,19 @@ $nameUser = $_SESSION['user']['name'] ?? '';
                 <li class="nav-item"><a class="nav-link" href="?act=product">Sản phẩm</a></li>
                 <li class="nav-item"><a class="nav-link" href="?act=about">Giới thiệu</a></li>
                 <li class="nav-item"><a class="nav-link" href="?act=contact">Liên hệ</a></li>
-                <li class="nav-item"><a class="nav-link" href="?act=dangnhap">Đăng nhập</a></li>
+               
             </ul>
             <form class="d-flex search-form" action="?act=search" method="GET">
                 <input class="form-control me-2" type="search" name="keyword" placeholder="Tìm kiếm..." aria-label="Search">
                 <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
+            <form action="" method="post" class="ms-3">
+    <?php if(!empty($_SESSION['user']['name'])): ?>
+        <a class="logout-btn" href="?act=dangxuat">Đăng xuất</a>
+    <?php else: ?>
+        <a class="login-btn" href="?act=dangnhap">Đăng nhập</a>
+    <?php endif; ?>
+</form>
         </div>
     </div>
 </nav>

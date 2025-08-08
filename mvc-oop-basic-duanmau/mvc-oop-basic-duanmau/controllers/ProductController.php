@@ -22,7 +22,7 @@ public function trangchu(){
     $sanpham_hot = $this->productModel->all_hot();
     $sanpham_moi = $this->productModel->all_moi();
     $khuyen_mai  = $this->productModel->all_khuyenmai();
-    $list_product = $this->productModel->all();
+    $danhsach_sp = $this->productModel->all();
 
   
     if (isset($_GET['search'])) {
@@ -34,7 +34,7 @@ public function trangchu(){
             $result = [];
 
       
-            foreach ($list_product as $tt) {
+            foreach ($danhsach_sp as $tt) {
                 if (stripos($tt->name, $key_name) !== false) {
                     $result[] = $tt;
                 }
@@ -44,7 +44,7 @@ public function trangchu(){
                 $thongbao = "Không tìm thấy";
             } else {
             
-                $list_product = $result;
+                $danhsach_sp = $result;
              
                 include "views/user/hienthitheoten.php";
                 return; 
@@ -111,18 +111,18 @@ public function trangchu(){
             include "views/user/trangchu.php";
         }
 
-        public function chi_tiet_sp($id){
+        public function chitietsanpham($id){
             session_start();
-            $chi_tiet_sp = $this->productModel->find($id);     
-            $loai= $chi_tiet_sp->category_id;                        
-            $sp_lien_quan =$this->productModel->find_lien_quan($loai); 
+            $chitietsanpham = $this->productModel->find($id);     
+            $loai= $chitietsanpham->idcategory;                        
+            $sp_lien_quan =$this->productModel->find_loai($loai); 
             $comment =$this->commentModel->find_comment_idpro($id);   
                     $comment1 = new Comment();
                     if(isset($_POST['gui'])){
                         $comment1->content        = $_POST['comment'];
                         $comment1->date           = date("Y-m-d H:i:s");
-                        $comment1->product_id     = $id;
-                        $comment1->user_id        = $_SESSION['user']['id'];
+                        $comment1->idproduct     = $id;
+                        $comment1->iduser        = $_SESSION['user']['id'];
                         
                         $noidung =$_POST['comment'];
                         if(!empty($noidung)){   

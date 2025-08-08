@@ -15,6 +15,7 @@
         }
 
         .content {
+            margin: 20px auto;
             padding: 40px;
             background: white;
             border-radius: 8px;
@@ -117,7 +118,7 @@
         ?>
 
         <h1>Trang quản lý danh mục</h1>
-        <a href="?act=trangchu_admin">← Quay lại trang chủ</a>
+        
 
         <!-- Form thêm danh mục -->
         <form action="" method="post" enctype="multipart/form-data">
@@ -125,8 +126,8 @@
                 <tr>
                     <th>Tên danh mục</th>
                     <td>
-                        <input type="text" name="name_danhmuc" placeholder="Nhập tên danh mục">
-                        <button type="submit" name="create_danhmuc">Tạo</button>
+                        <input type="text" name="name_danhmuc" placeholder="Tạo tên danh mục">
+                        <button type="submit" name="create_danhmuc">Tạo mới</button>
                         <span class="message success"><?=$thanhcong?></span>
                         <span class="message error"><?=$loi?></span>
                     </td>

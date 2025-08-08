@@ -6,62 +6,101 @@
     <title>Đăng nhập</title>
   
     <style>
-        body {
-            margin: 0 auto;
-            width: 1200px;
-        }
+       body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-        form {
-            border: 1px solid transparent;
-            padding: 50px;
-            width: 400px;
-            margin: 100px auto;
-            border-radius: 20px;
-            box-shadow: 0px 0px 2px 2px rgba(35, 117, 189, 1);
-            background-color: #fff;
-        }
+form {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 40px 50px;
+    width: 380px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.6s ease-in-out;
+}
 
-        h2 {
-            text-align: center;
-        }
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
 
-        a {
-            margin-left: 140px;
-            display: block;
-            margin-top: 10px;
-            text-align: center;
-        }
+table {
+    width: 100%;
+}
 
-        input, select {
-            width: 250px;
-            border-radius: 20px;
-            height: 30px;
-            padding: 5px 10px;
-            border: 1px solid #ccc;
-        }
+table td {
+    padding: 10px 0;
+    font-weight: bold;
+    color: #555;
+}
 
-        table td {
-            padding: 10px 5px; 
-        }
+input, select {
+    width: 100%;
+    height: 38px;
+    padding: 5px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
 
-        button {
-            margin-left: 130px;
-            background: #c82840ff;
-            border: none;
-            color: white;
-            padding: 8px 18px;
-            border-radius: 20px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
+input:focus, select:focus {
+    border-color: #4facfe;
+}
 
-        span {
-            color: red;
-            display: block;
-            text-align: center;
-            margin-top: 10px;
-        }
+button {
+    width: 100%;
+    background: #4facfe;
+    border: none;
+    color: white;
+    padding: 10px 0;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #00c6ff;
+    transform: scale(1.03);
+}
+
+a {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #4facfe;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #00c6ff;
+}
+
+span {
+    color: red;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Hiệu ứng mượt khi load */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
     </style>
 </head>
 <body>
@@ -82,8 +121,8 @@
                 <td>Vai trò:</td>
                 <td>
                     <select name="role">
-                        <option value="1">Khách hàng</option>
-                        <option value="0">Người quản trị</option>
+                        <option value="1">khách hàng </option>
+                        <option value="0">Admin</option>
                     </select>
                 </td>
             </tr>

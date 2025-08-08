@@ -1,108 +1,175 @@
+<?php require_once __DIR__ . '/../header.php'; ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body{
-            margin:0 auto;
-            width:1200px;
-        }
-        main{
-            margin-left:260px;
-            background-color:	#f5f5f5; /* hồng pastel */
-            color: #333;
-            font-family: 'Segoe UI', sans-serif;    
-            padding-bottom:100px;
-        }
-
-        input {
-            margin-top:20px;
-            width:400px;
-            height:30px;
-            border-radius: 10px;
-        }
-
-        button{
-            margin-right:150px;
-            background-color: rgb(217, 28, 217);
-            border-radius: 10px;
-            height:30px;
-            width:90px;
-            color:white;
-            margin-top:20px;
-        }
-        button:hover{
-            background-color: rgba(179, 51, 179, 1);
-        }
-        td a{
-            color:black;
-            padding: 3px;
-            margin: 20px 15px;
-        }
-
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cập nhật sản phẩm</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+    }
+    main {
+        background: #fff;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+        text-align: center;
+        color: #d91c1c;
+        margin-bottom: 25px;
+    }
+    form table {
+        width: 100%;
+    }
+    th {
+        text-align: left;
+        padding: 10px 0;
+        width: 150px;
+        vertical-align: top;
+    }
+    td {
+        padding: 10px 0;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    select {
+        width: 100%;
+        padding: 10px 15px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        background-color: #fff;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    input:focus,
+    select:focus {
+        border-color: #d91c1c;
+        outline: none;
+        box-shadow: 0 0 6px rgba(217, 28, 28, 0.3);
+    }
+    .current-img {
+        max-width: 120px;
+        border-radius: 8px;
+        margin-top: 5px;
+    }
+    button {
+        background-color: #d91c1c;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 15px;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: #a51414;
+    }
+    .actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    .actions a {
+        padding: 10px 20px;
+        background: #ccc;
+        color: black;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+    }
+    .actions a:hover {
+        background-color: #aaa;
+    }
+    .message {
+        margin-top: 15px;
+        font-weight: bold;
+    }
+    .error {
+        color: red;
+    }
+    .success {
+        color: green;
+    }
+</style>
 </head>
 <body>
-    <?php  require_once __DIR__ . '/../header.php';?>
-    <main>
-    <h1>Trang update sản phẩm</h1>
+<main>
+    <h1>Cập nhật sản phẩm</h1>
     <form action="" method="post" enctype="multipart/form-data">
         <table>
             <tr>
                 <th>Tên sản phẩm</th>
-                <td><input type="text" name="name" value="<?=$sanpham->name?>"></td>
+                <td><input type="text" name="name" value="<?= htmlspecialchars($sanpham->name) ?>"></td>
             </tr>
             <tr>
-                <th>Ảnh</th>
+                <th>Ảnh hiện tại</th>
+                <td>
+                  <?php if (!empty($sanpham->image)) : ?>
+    <img src="<?= 'uploads/' . htmlspecialchars($sanpham->image) ?>" alt="Ảnh sản phẩm" class="current-img">
+<?php else: ?>
+    <span>Chưa có ảnh</span>
+<?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <th>Ảnh mới</th>
                 <td><input type="file" name="anh_sp"></td>
-                <img src="<?= ANH_IMG . $sanpham->image ?>" alt="ảnh sản phẩm" width="100" height="120">
             </tr>
             <tr>
                 <th>Loại</th>
                 <td>
-                    <select name="category_id" id="">
-                    <option value="">chọn danh mục</option>
-                    <?php
-                    foreach($danhsach as $tt){
-                        ?>
-                    <option value="<?=$tt->id?>"><?=$tt->name?></option>
-                        <?php
-                    }
-                    ?>
-                </select>
+                    <select name="idcategory" required>
+                        <option value="">-- Chọn danh mục --</option>
+                        <?php foreach ($danhsach as $dm): ?>
+                            <option value="<?= $dm->id ?>" <?= $sanpham->idcategory == $dm->id ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($dm->name) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <th>Hot</th>
-                <td><input type="number" name="hot" value="<?=$sanpham->hot?>"> </td>
+                <td><input type="number" name="hot" min="1" max="3" value="<?= htmlspecialchars($sanpham->hot) ?>"></td>
             </tr>
             <tr>
                 <th>Giá</th>
-                <td><input type="number" name="price" value="<?=$sanpham->price?>"></td>
+                <td><input type="number" name="price" value="<?= htmlspecialchars($sanpham->price) ?>"></td>
             </tr>
             <tr>
-                <th>Giảm giá</th>
-                <td><input type="number" name="discount" value="<?=$sanpham->discount?>"></td>
+                <th>Giảm giá (%)</th>
+                <td><input type="number" name="discount" min="0" max="100" value="<?= htmlspecialchars($sanpham->discount) ?>"></td>
             </tr>
             <tr>
                 <th>Miêu tả</th>
-                <td><input type="text" name="description" value="<?=$sanpham->description?>"></td>
+                <td><input type="text" name="descripsion" value="<?= htmlspecialchars($sanpham->descripsion) ?>"></td>
             </tr>
             <tr>
                 <th>Số lượng</th>
-                <td><input type="number" name="quantity" value="<?=$sanpham->quantity?>"></td>
-            </tr>
-            <tr>
-                <td><a style="border: none;"  href="?act=<?='quanly_sanpham'?>">quay lại</a></td>
-                <td><button style="border: none;"  type="submit" name="update_sanpham">update</button></td>
+                <td><input type="number" name="quantity" value="<?= htmlspecialchars($sanpham->quantity) ?>"></td>
             </tr>
         </table>
-            <span style="color:red;"><?= $loi?></span>
-            <span style="color:green;"><?= $thanhcong?></span>
+        <div class="actions">
+            <a href="?act=sanpham">Quay lại</a>
+            <button type="submit" name="update_sanpham">Cập nhật</button>
+        </div>
+        <?php if (!empty($loi)): ?>
+            <div class="message error"><?= htmlspecialchars($loi) ?></div>
+        <?php endif; ?>
+        <?php if (!empty($thanhcong)): ?>
+            <div class="message success"><?= htmlspecialchars($thanhcong) ?></div>
+        <?php endif; ?>
     </form>
-    </main>
-
+</main>
 </body>
 </html>
