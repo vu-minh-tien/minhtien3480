@@ -21,7 +21,7 @@ $id = $_GET['id'] ?? null;
 
 match ($act) {
   // Đăng nhập, đăng xuất, đăng ký
-    '/'                 => (new Nhap_kyController())->home(),
+    '/'          => (new Nhap_kyController())->dangnhap(),
     'dangxuat'          => (new Nhap_kyController())->dangxuat(),
     'dangnhap'          => (new Nhap_kyController())->dangnhap(),
     'dangky'            => (new Nhap_kyController())->dangky(),

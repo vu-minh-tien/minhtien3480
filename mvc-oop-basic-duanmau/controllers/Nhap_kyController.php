@@ -16,9 +16,7 @@ class Nhap_kyController {
         $this->categoryModel = new CategoryModel();
     }
 
-    public function home(){
-        include "views/dangky_dangnhap/home.php";
-    }
+   
 
     public function dangnhap(){
         session_start();
