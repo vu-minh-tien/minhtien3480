@@ -15,25 +15,25 @@
 <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="./uploads/img/0.png" class="d-block w-100" alt="Banner 1" style="height: 800px; object-fit: cover;">
+      <img src="./uploads/img/0n.png" class="d-block w-100" alt="Banner 1" style="height: 800px; object-fit: cover;">
     </div>
     <div class="carousel-item">
-      <img src="./uploads/img/1.png" class="d-block w-100" alt="Banner 2" style="height: 800px; object-fit: cover;">
+      <img src="./uploads/img/1n.png" class="d-block w-100" alt="Banner 2" style="height: 800px; object-fit: cover;">
     </div>
     <div class="carousel-item">
-      <img src="./uploads/img/2.png" class="d-block w-100" alt="Banner 3" style="height: 800px; object-fit: cover;">
+      <img src="./uploads/img/2n.png" class="d-block w-100" alt="Banner 3" style="height: 800px; object-fit: cover;">
     </div>
   <div class="carousel-item">
-      <img src="./uploads/img/3.png" class="d-block w-100" alt="Banner 4"style="height: 800px; object-fit: cover;">
+      <img src="./uploads/img/3n.png" class="d-block w-100" alt="Banner 4"style="height: 800px; object-fit: cover;">
     </div>
     <div class="carousel-item">
-      <img src="./uploads/img/4.png" class="d-block w-100" alt="Banner 5"style="height: 800px; object-fit: cover;">
+      <img src="./uploads/img/4n.png" class="d-block w-100" alt="Banner 5"style="height: 800px; object-fit: cover;">
     </div>
     <div class="carousel-item">
-      <img src="./uploads/img/5.png" class="d-block w-100" alt="Banner 6"style="height: 800px; object-fit: cover;">
+      <img src="./uploads/img/5n.png" class="d-block w-100" alt="Banner 6"style="height: 800px; object-fit: cover;">
     </div>
     <div class="carousel-item">
-      <img src="./uploads/img/6.png" class="d-block w-100" alt="Banner 7"style="height: 800px; object-fit: cover;">
+      <img src="./uploads/img/6n.png" class="d-block w-100" alt="Banner 7"style="height: 800px; object-fit: cover;">
     </div>
   </div>
 

@@ -19,9 +19,7 @@
       
 public function trangchu(){
     $thongbao = "";
-    $sanpham_hot = $this->productModel->all_hot();
-    $sanpham_moi = $this->productModel->all_moi();
-    $khuyen_mai  = $this->productModel->all_khuyenmai();
+   
     $danhsach_sp = $this->productModel->all();
 
   
@@ -96,20 +94,6 @@ public function trangchu(){
         include "views/user/about.php";
         }
 
-        public function sanpham_hot(){
-            $sanpham_hot =$this->productModel->all_hot();
-            include "views/user/trangchu.php";
-        }
-
-        public function sanpham_moi(){
-            $sanpham_moi =$this->productModel->all_moi();
-            include "views/user/trangchu.php";
-        }
-
-        public function khuyen_mai(){
-            $khuyen_mai =$this->productModel->all_khuyenmai();
-            include "views/user/trangchu.php";
-        }
 
         public function chitietsanpham($id){
             session_start();
@@ -139,5 +123,12 @@ public function trangchu(){
                     }
             include "views/user/chitietsanpham.php";
         }
+public function search() {
+    $keyword = $_GET['keyword'] ?? '';
+    $productModel = new ProductModel();
+    $products = $productModel->searchByName($keyword);
+    require 'views/user/search_result.php';
+}
+
     }
     ?>

@@ -14,13 +14,13 @@
             max-width: 1200px;
         }
         .product-card {
+            position: relative;
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             overflow: hidden;
             text-align: center;
             transition: transform 0.2s ease;
-            padding-bottom: 15px;
         }
         .product-card:hover {
             transform: translateY(-5px);
@@ -34,21 +34,35 @@
             font-size: 18px;
             margin: 10px 0;
         }
+        .price-old {
+            text-decoration: line-through;
+            color: gray;
+            font-size: 14px;
+        }
         .price {
             color: red;
             font-weight: bold;
+            font-size: 18px;
             margin-bottom: 10px;
         }
         .btn-detail {
             display: inline-block;
-            background: #28a745;
+            background: #777;
             color: white;
             padding: 8px 15px;
             border-radius: 5px;
             text-decoration: none;
         }
-        .btn-detail:hover {
-            background: #218838;
+        .badge-sale {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: red;
+            color: white;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -62,12 +76,27 @@
 
 <div class="product-container">
     <?php foreach($danhsach_sp as $sp): ?>
-    <div class="product-card">
-        <img src="uploads/<?php echo htmlspecialchars($sp->image); ?>" alt="<?php echo htmlspecialchars($sp->name); ?>">
-        <h3><?php echo htmlspecialchars($sp->name); ?></h3>
-        <p class="price"><?php echo number_format($sp->price, 0, ',', '.'); ?> VNĐ</p>
-        <a class="btn-detail" href="index.php?act=chitietsanpham&id=<?php echo $sp->id; ?>">Xem chi tiết</a>
-    </div>
+        <div class="product-card">
+            <?php if (!empty($sp->discount) && $sp->discount > 0): ?>
+                <span class="badge-sale">-<?php echo $sp->discount; ?>%</span>
+            <?php endif; ?>
+
+            <img src="uploads/<?php echo htmlspecialchars($sp->image); ?>" alt="<?php echo htmlspecialchars($sp->name); ?>">
+            <h3><?php echo htmlspecialchars($sp->name); ?></h3>
+
+            <?php if (!empty($sp->discount) && $sp->discount > 0): ?>
+                <?php 
+                    $price_old = $sp->price;
+                    $price_new = $price_old - ($price_old * $sp->discount / 100);
+                ?>
+                <p class="price-old"><?php echo number_format($price_old, 0, ',', '.'); ?> đ</p>
+                <p class="price"><?php echo number_format($price_new, 0, ',', '.'); ?> đ</p>
+            <?php else: ?>
+                <p class="price"><?php echo number_format($sp->price, 0, ',', '.'); ?> đ</p>
+            <?php endif; ?>
+
+            <a href="index.php?act=chitietsanpham&id=<?php echo $sp->id; ?>" class="btn-detail">Xem chi tiết</a>
+        </div>
     <?php endforeach; ?>
 </div>
 

@@ -109,11 +109,11 @@
     </div>
 
     <!-- Form tìm kiếm -->
-    <form action="" method="post" class="search-form">
-        <input type="text" name="keyword" placeholder="Tìm theo tên sản phẩm..." 
-               value="<?php echo isset($_POST['keyword']) ? htmlspecialchars($_POST['keyword']) : ''; ?>">
-        <button type="submit" name="search">Tìm kiếm</button>
-    </form>
+   <form action="" method="post" class="search-form">
+    <input type="text" name="tukhoa" placeholder="Tìm theo tên sản phẩm..." 
+           value="<?php echo isset($_POST['tukhoa']) ? htmlspecialchars($_POST['tukhoa']) : ''; ?>">
+    <button type="submit" name="tim">Tìm kiếm</button>
+</form>
 
     <!-- Bảng sản phẩm -->
     <table>
@@ -121,9 +121,9 @@
             <tr>
                 <th>ID</th>
                 <th>Ảnh</th>
-                <th>Tên sản phẩm</th>
+                <th>Tên đồng hồ </th>
                 <th>Giá</th>
-                <th>Loại</th>
+                <th>Loại đồng hồ </th>
                 <th>Số lượng</th>
                 <th>Hot</th>
                 <th>Giảm giá</th>
@@ -141,7 +141,7 @@
 </td>
                     <td><?php echo htmlspecialchars($p->name); ?></td>
                     <td><?php echo number_format($p->price, 0, ',', '.'); ?> đ</td>
-                    <td><?php echo $p->idcategory; ?></td>
+                    <td><?php echo $p->namecategory; ?></td>
                     <td><?php echo $p->quantity; ?></td>
                     <td><?php echo $p->hot; ?></td>
                     <td><?php echo $p->discount; ?>%</td>
@@ -160,6 +160,7 @@
         <?php endif; ?>
         </tbody>
     </table>
+   
 </div>
 
 </body>

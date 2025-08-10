@@ -199,17 +199,17 @@ public function delete_taikhoan($id) {
         include "views/admin/taikhoan/noidung.php";
     }
 }
-    public function quanly_sanpham() {
-        $err = "";
-        $danhsach= $this->productModel->all();
+   public function quanly_sanpham() {
+    $err = "";
+    $danhsach = $this->productModel->all();
+    $ketqua = [];
 
-        if (isset($_POST['tim'])) {
-            $tukhoa = $_POST['tukhoa'];
+    if (isset($_POST['tim'])) {
+        $tukhoa = $_POST['tukhoa'] ?? '';
 
-            if (empty($tukhoa)) {
-                $err = "bạn chưa nhập nội dung";
-            }
-
+        if (trim($tukhoa) === '') {
+            $err = "Bạn chưa nhập nội dung";
+        } else {
             foreach ($danhsach as $tt) {
                 if (stripos($tt->name, $tukhoa) !== false) {
                     $ketqua[] = $tt;
@@ -217,15 +217,16 @@ public function delete_taikhoan($id) {
             }
 
             if (empty($ketqua)) {
-                $err = "không tìm thấy";
+                $err = "Không tìm thấy";
                 $danhsach = [];
             } else {
                 $danhsach = $ketqua;
             }
         }
-
-        include "views/admin/sanpham/noidung.php";
     }
+
+    include "views/admin/sanpham/noidung.php";
+}
 
     public function create_sanpham() {
         $loi = "";
@@ -377,6 +378,10 @@ public function update_sanpham($id) {
     
     include "views/admin/sanpham/update_sanpham.php";
 }
+
+
+
+
 }
 ?>
 

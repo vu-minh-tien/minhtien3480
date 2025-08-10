@@ -6,7 +6,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Danh sách sản phẩm</title>
+    <title></title>
     <style>
         .product-container {
             display: grid;
@@ -42,20 +42,18 @@
         }
         .btn-detail {
             display: inline-block;
-            background: #28a745;
+            background: #777;
             color: white;
             padding: 8px 15px;
             border-radius: 5px;
             text-decoration: none;
         }
-        .btn-detail:hover {
-            background: #218838;
-        }
+        
     </style>
 </head>
 <body>
 
-<h1 style="text-align:center;">Danh sách sản phẩm</h1>
+<h1 style="text-align:center;"> sản phẩm</h1>
 
 <?php if (!empty($thongbao)) : ?>
     <p style="text-align:center;color:red;"><?php echo $thongbao; ?></p>
@@ -67,7 +65,7 @@
             <img src="uploads/<?php echo htmlspecialchars($sp->image); ?>" alt="<?php echo htmlspecialchars($sp->name); ?>">
             <h3><?php echo htmlspecialchars($sp->name); ?></h3>
             <p class="price"><?php echo number_format($sp->price, 0, ',', '.'); ?> đ</p>
-            <a href="index.php?act=chitiet&id=<?php echo $sp->id; ?>" class="btn-detail">Xem chi tiết</a>
+            <a href="index.php?act=chitietsanpham&id=<?php echo $sp->id; ?>" class="btn-detail">Xem chi tiết</a>
         </div>
     <?php endforeach; ?>
 </div>

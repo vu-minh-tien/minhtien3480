@@ -10,16 +10,23 @@
         form {
            
             /* margin: 30px auto; */
-            padding: 20px;
-            
+            /* padding: 20px; */
+              
             
             border-radius: 8px;
           
         }
         form div {
-            margin-bottom: 15px;
+            width: 1200px;
+          margin-bottom: 15px;
+             margin: 40px auto;
+            padding: 0 20px;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+           
         }
         label {
+            
             display: block;
             font-weight: bold;
             margin-bottom: 6px;
@@ -31,17 +38,22 @@
             border-radius: 4px;
             resize: vertical;
         }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
+      .form-submit {
+    text-align: center;
+    margin-top: 20px;
+}
+.form-submit button {
+    width: 500px;
+    background-color: #777;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.form-submit button:hover {
+    background-color: #0056b3;
+}
         .message {
             max-width: 600px;
             margin: 15px auto;
@@ -122,7 +134,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="content">Nội dung:</label>
         <textarea id="content" name="content" rows="6" required><?= htmlspecialchars($content ?? '') ?></textarea>
     </div>
+ <div class="form-submit">
     <button type="submit">Gửi liên hệ</button>
+</div>
 </form>
 
 </body>

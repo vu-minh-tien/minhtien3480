@@ -9,6 +9,7 @@ public $descripsion;
 public $hot;
 public $discount;
 public $quantity;
+public $namecategory;
 }
 class ProductModel {
     public $conn;
@@ -18,7 +19,10 @@ class ProductModel {
     }
  public function all(){
             try{
-                $sql="SELECT * FROM `product`";
+                $sql="SELECT pro.*, cat.name as namecategory 
+FROM `product` as pro 
+JOIN `category` as cat 
+ON pro.idcategory = cat.id;";
                 $data=$this->conn->query($sql)->fetchAll();
                 $danhsachproduct=[];
                 foreach($data as $value){
@@ -28,10 +32,11 @@ class ProductModel {
                     $product->image       = $value['image'];
                     $product->price       = $value['price'];
                     $product->idcategory = $value['idcategory'];
-                    $product->descripsion = $value['descripsion'];
+                   $product->descripsion = $value['descripsion'];
                     $product->hot         = $value['hot'];
                     $product->discount    = $value['discount'];
                     $product->quantity    = $value['quantity'];
+                     $product->namecategory = $value['namecategory'];
                     $danhsachproduct[]=$product;
                 }
                 return $danhsachproduct;
@@ -138,80 +143,8 @@ public function find($id){
         }
         }
 
-        public function all_hot(){
-            try{
-                $sql="SELECT * FROM `product` Where `hot` = 1 LIMIT 8";
-                $data=$this->conn->query($sql)->fetchAll();
-                $danhsachproduct=[];
-                foreach($data as $value){
-                     $product = new Product();
-                    $product->id        =$value['id'];
-                    $product->name        = $value['name'];
-                    $product->image       = $value['image'];
-                    $product->price       = $value['price'];
-                    $product->idcategory = $value['idcategory'];
-                    $product->descripsion = $value['descripsion'];
-                    $product->hot         = $value['hot'];
-                    $product->discount    = $value['discount'];
-                    $product->quantity    = $value['quantity'];
-                    $danhsachproduct[]=$product;
-                }
-                return $danhsachproduct;
+       
 
-            }catch (PDOException $err) {
-            echo "Lỗi : " . $err->getMessage();
-        }
-        }
-
-        public function all_moi(){
-            try{
-                $sql="SELECT * FROM `product` Where `hot` = 2 LIMIT 8";
-                $data=$this->conn->query($sql)->fetchAll();
-                $danhsachproduct=[];
-                foreach($data as $value){
-                     $product = new Product();
-                    $product->id        =$value['id'];
-                    $product->name        = $value['name'];
-                    $product->image       = $value['image'];
-                    $product->price       = $value['price'];
-                    $product->idcategory = $value['idcategory'];
-                    $product->descripsion = $value['descripsion'];
-                    $product->hot         = $value['hot'];
-                    $product->discount    = $value['discount'];
-                    $product->quantity    = $value['quantity'];
-                    $danhsachproduct[]=$product;
-                }
-                return $danhsachproduct;
-
-            }catch (PDOException $err) {
-            echo "Lỗi: " . $err->getMessage();
-        }
-        }
-
-        public function all_khuyenmai(){
-            try{
-                $sql="SELECT * FROM `product` Where `hot` = 3 LIMIT 8";
-                $data=$this->conn->query($sql)->fetchAll();
-                $danhsachproduct=[];
-                foreach($data as $value){
-                     $product = new Product();
-                    $product->id           =$value['id'];
-                    $product->name        = $value['name'];
-                    $product->image       = $value['image'];
-                    $product->price       = $value['price'];
-                    $product->idcategory = $value['idcategory'];
-                    $product->descripsion = $value['descripsion'];
-                    $product->hot         = $value['hot'];
-                    $product->discount    = $value['discount'];
-                    $product->quantity    = $value['quantity'];
-                    $danhsachproduct[]=$product;
-                }
-                return $danhsachproduct;
-
-            }catch (PDOException $err) {
-            echo "Lỗi : " . $err->getMessage();
-        }
-        }
 
         public function all_productuser($sql){
             try{
@@ -237,7 +170,12 @@ public function find($id){
         }
         }
 
-
+public function searchByName($keyword) {
+    $sql = "SELECT * FROM product WHERE name LIKE :keyword";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute(['keyword' => '%' . $keyword . '%']);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }
 
 ?>

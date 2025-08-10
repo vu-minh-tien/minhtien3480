@@ -32,10 +32,8 @@ match ($act) {
     'product'           => (new ProductController())->sanpham(),
     'contact'           => (new ProductController())->lien_he(),
     'about'             => (new ProductController())->gioi_thieu(),
-    'sanpham_hot'       => (new ProductController())->sanpham_hot(),
-    'sanpham_moi'       => (new ProductController())->sanpham_moi(),
-    'khuyen_mai'        => (new ProductController())->khuyen_mai(),
     'chitietsanpham'    => (new ProductController())->chitietsanpham($id),
+    'search'            => (new ProductController())->search(),
 
     // Quản trị viên
     'trangchu_admin'    => (new AdminController())->trangchu_admin(),

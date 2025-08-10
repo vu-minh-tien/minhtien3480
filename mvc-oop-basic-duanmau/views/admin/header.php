@@ -17,7 +17,7 @@ $page = $_GET['page'] ?? 'dashboard';
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Header</title>
+    <title>Admin </title>
     <style>
         * {
             margin: 0;
@@ -28,8 +28,13 @@ $page = $_GET['page'] ?? 'dashboard';
             font-family: Arial, sans-serif;
         }
         .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* đảm bảo nằm trên cùng */
             height: 60px;
-            background-color: rgba(28, 170, 235, 1);
+           background-color: #777;
             display: flex;
             align-items: center;
             padding: 10px 20px;
@@ -63,7 +68,7 @@ $page = $_GET['page'] ?? 'dashboard';
             margin-left: 10px;
         }
         .menu a.logout-btn {
-    background-color: #0451edff; /* đỏ */
+    background-color: #777; /* đỏ */
     color: white;
     font-weight: bold;
     border-radius: 5px;
@@ -75,13 +80,19 @@ $page = $_GET['page'] ?? 'dashboard';
     background-color: #b02a37; /* đỏ đậm khi hover */
     color: white;
 }
+ /* Chừa khoảng trống để nội dung không bị che */
+    .content {
+        margin-top: 70px;
+        padding: 20px;
+    }
     </style>
 </head>
 <body>
+    <div class="content">
     <div class="menu">
   <div class="anh">
     <a href="">
-    <a href="?act=thongtin_admin"><img src="uploads/img/logo.png" alt="avatar"></a>
+    <a href="?act=thongtin_admin"><img src="uploads/img/logoo.png" alt="avatar"></a>
 </a>
     
   </div>
@@ -102,5 +113,7 @@ $page = $_GET['page'] ?? 'dashboard';
     </a>
 </li>
     </div>
+</div>
+   
 </body>
 </html>

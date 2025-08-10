@@ -80,6 +80,7 @@
         margin-top: 20px;
     }
     .actions a {
+        height: 40px;
         padding: 10px 20px;
         background: #ccc;
         color: black;

@@ -7,104 +7,99 @@
     <title>Quản lý danh mục</title>
     <style>
       
-        body {
-            
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-        }
+       body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+   
+}
 
-        .content {
-            margin: 20px auto;
-            padding: 40px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+.content {
+    
+    margin: 20px auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
 
-        h1 {
-            text-align: center;
-            margin-bottom: 40px;
-            color: #2c3e50;
-        }
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
 
-        a {
-            /* display: inline-block; */
-            margin-bottom: 20px;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        a:hover {
-            text-decoration: underline;
-        }
+a:hover {
+    text-decoration: underline;
+}
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-bottom: 40px;
-            background-color: #fff;
-        }
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 40px;
+    background-color: #fff;
+}
 
-        th, td {
-            padding: 12px 20px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
+th, td {
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
 
-        th {
-            background-color: #f1f1f1;
-            color: #333;
-            font-weight: bold;
-        }
+th {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+}
 
-        td {
-            background-color: #ffffff;
-        }
+input[type="text"] {
+    height: 35px;
+    width: 220px;
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+}
 
-        input[type="text"] {
-            height: 35px;
-            width: 220px;
-            padding: 5px 15px;
-            border-radius: 20px;
-            border: 1px solid #ccc;
-            outline: none;
-        }
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    width: 80px;
+    height: 35px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
 
-        button {
-            background-color: #e91e63;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            width: 80px;
-            height: 35px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-left: 10px;
-        }
+button:hover {
+    background-color: #c2185b;
+}
 
-        button:hover {
-            background-color: #c2185b;
-        }
+.right {
+    text-align: right;
+}
 
-        .right {
-            text-align: right;
-        }
+span.message {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 14px;
+}
 
-        span.message {
-            display: inline-block;
-            margin-left: 10px;
-            font-size: 14px;
-        }
+.success {
+    color: green;
+}
 
-        .success {
-            color: green;
-        }
+.error {
+    color: red;
+}
 
-        .error {
-            color: red;
-        }
     </style>
 </head>
 <body>
