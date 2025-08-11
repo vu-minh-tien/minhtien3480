@@ -9,7 +9,7 @@
        body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #4facfe, #00f2fe); 
+    background-image: url('uploads/img/logoo.png');
     display: flex;
     justify-content: center;
     align-items: center;
