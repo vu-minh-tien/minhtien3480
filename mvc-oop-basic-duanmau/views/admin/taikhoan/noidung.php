@@ -121,24 +121,28 @@
         </tr>
     </thead>
     <tbody>
-        <?php if (!empty($danhsach)): ?>
-            <?php foreach ($danhsach as $user): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($user->id); ?></td>
-                <td><?php echo htmlspecialchars($user->name); ?></td>
-                <td><?php echo htmlspecialchars($user->email); ?></td>
-                <td><?php echo htmlspecialchars($user->number ?? ''); ?></td> <!-- Số điện thoại -->
-                <td><?php echo htmlspecialchars($user->password ?? ''); ?></td> <!-- Mật khẩu -->
-                <td><?php echo htmlspecialchars($user->role ?? 'user'); ?></td>
-                <td>
-                    <a href="?act=update_taikhoan&id=<?php echo $user->id; ?>" class="btn-edit">Sửa</a>
-                    <a href="?act=delete_taikhoan&id=<?php echo $user->id; ?>" class="btn-delete" onclick="return confirm('Bạn có chắc muốn xóa tài khoản này?');">Xóa</a>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr><td colspan="7" style="text-align:center;">Không có tài khoản nào</td></tr>
-        <?php endif; ?>
+            <?php if (!empty($danhsach)): ?>
+        <?php foreach ($danhsach as $user): ?>
+        <tr>
+            <td><?php echo htmlspecialchars($user->id); ?></td>
+            <td><?php echo htmlspecialchars($user->name); ?></td>
+            <td><?php echo htmlspecialchars($user->email); ?></td>
+            <td><?php echo htmlspecialchars($user->number ?? ''); ?></td>
+            <td><?php echo '********'; ?></td> <!-- Ẩn mật khẩu thay vì hiển thị hash -->
+            <td><?php echo htmlspecialchars($user->role ?? 'user'); ?></td>
+            <td>
+                <?php if (isset($user->status) && $user->status == 1): ?>
+                    <a href="?act=lock_taikhoan&id=<?php echo $user->id; ?>" class="btn-delete" onclick="return confirm('Bạn có chắc muốn khóa tài khoản này?');">Khóa</a>
+                <?php else: ?>
+                    <a href="?act=unlock_taikhoan&id=<?php echo $user->id; ?>" class="btn-edit" onclick="return confirm('Bạn có chắc muốn mở khóa tài khoản này?');">Mở khóa</a>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr><td colspan="7" style="text-align:center;">Không có tài khoản nào</td></tr>
+    <?php endif; ?>
+
     </tbody>
 </table>
 

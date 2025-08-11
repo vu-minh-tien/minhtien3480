@@ -50,6 +50,9 @@ match ($act) {
     'taikhoan'   => (new AdminController())->quanly_taikhoan(),
     'delete_user'   => (new AdminController())->delete_taikhoan($id),
     'update_taikhoan'   => (new AdminController())->update_taikhoan($id),
+    'toggle_status'     => (new AdminController())->toggle_status($id),
+        'lock_taikhoan'   => (new AdminController())->lock_taikhoan($id),
+    'unlock_taikhoan' => (new AdminController())->unlock_taikhoan($id),
     'binhluan'   => (new AdminController())->quanly_binhluan(),
     'delete_binhluan'   => (new AdminController())->delete_binhluan($id),
     

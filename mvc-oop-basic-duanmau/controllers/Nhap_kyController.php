@@ -18,71 +18,78 @@ class Nhap_kyController {
 
    
 
-    public function dangnhap(){
-        session_start();
-        $loi="";
-        $dulieu_taikhoan = $this->userModel->all();
-        if(isset($_POST['dangnhap'])){
-            $email    = trim($_POST['email']);
-            $password = trim($_POST['password']);
-            $role     = (int)$_POST['role'];
-            $kiemtra = false;
+  public function dangnhap(){
+    session_start();
+    $loi = "";
+    if(isset($_POST['dangnhap'])){
+        $email    = trim($_POST['email']);
+        $password = trim($_POST['password']);
 
-            foreach($dulieu_taikhoan as $tt){
-                if($email === $tt->email && $password === $tt->password && $role === (int)$tt->role){
-                    $kiemtra = true;
-                     $_SESSION['user'] = [  
-                    'id'   => $tt->id,
-                    'name' => $tt->name,
-                ];
-                    if($role ==0){
+        // Lấy user theo email
+        $user = $this->userModel->findByEmail($email);
+
+        if($user){
+            // Kiểm tra tài khoản đã kích hoạt (status = 1)
+            if(isset($user->status) && $user->status != 1){
+                $loi = "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị.";
+            } else {
+                // Kiểm tra mật khẩu
+                if(password_verify($password, $user->password)){
+                    // Lưu thông tin user vào session
+                    $_SESSION['user'] = [
+                        'id'   => $user->id,
+                        'name' => $user->name,
+                        'role' => $user->role
+                    ];
+                    // Chuyển hướng theo role
+                    if($user->role == 0){
                         header("Location:?act=trangchu_admin");
                         exit;
-                    }
-                    elseif($role ==1){
+                    } else {
                         header("Location:?act=trangchu");
                         exit;
                     }
-                } 
-
-            }
-            if(!$kiemtra){
-                    $loi ="kiểm tra lại các dữ liệu của bạn!";
+                } else {
+                    $loi = "Mật khẩu không đúng.";
                 }
+            }
+        } else {
+            $loi = "Email không tồn tại.";
         }
-            include "views/dangky_dangnhap/dangnhap.php";
     }
+    include "views/dangky_dangnhap/dangnhap.php";
+}
+
 
 
     public function dangky(){
-        $loi="";
-        $thanhcong="";
-        $user = new User();
-        if(isset($_POST['dangky'])){
-            $user->name=$_POST['name'];
-            $user->email=$_POST['email'];
-            $user->address=$_POST['address'];
-            $user->number=$_POST['number'];
-            $user->password=$_POST['password'];
-            $user->role=(int)1;
+    $loi = "";
+    $thanhcong = "";
+    $user = new User();
+    if (isset($_POST['dangky'])) {
+        $user->name = $_POST['name'];
+        $user->email = $_POST['email'];
+        $user->address = $_POST['address'];
+        $user->number = $_POST['number'];
+        // Mã hóa mật khẩu trước khi lưu
+        $user->password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $user->role = (int)1;
 
-
-            if(empty($user->name) || empty($user->address) || empty($user->number) || empty($user->password) || empty($user->email)){
-                $loi="kiểm tra lại các trường giữ liệu";
-            }
-            else{
-                $ketqua = $this->userModel->create($user);
-                if($ketqua ===1){
-                    $thanhcong="Đăng ký thành công";
-                }
-                else{
-                    $loi="Đăng ký thất bại";
-                }
+        if (empty($user->name) || empty($user->address) || empty($user->number) || empty($_POST['password']) || empty($user->email)) {
+            $loi = "Kiểm tra lại các trường dữ liệu";
+        } else {
+            $ketqua = $this->userModel->create($user);
+            if ($ketqua === 1) {
+                $thanhcong = "Đăng ký thành công";
+            } else {
+                $loi = "Đăng ký thất bại";
             }
         }
-        
-       include "views/dangky_dangnhap/dangky.php";
     }
+
+    include "views/dangky_dangnhap/dangky.php";
+}
+
 
     public function dangxuat(){
         session_start();

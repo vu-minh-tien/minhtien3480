@@ -105,32 +105,22 @@ span {
 </head>
 <body>
     <form method="POST">
-        <h2>Đăng nhập</h2>
-        <table>
-            <tr>
-                <td>Tên đăng nhập:</td>
-                <td><input type="email" name="email" required placeholder="Nhập email"></td>
-            </tr>
+    <h2>Đăng nhập</h2>
+    <table>
+        <tr>
+            <td>Tên đăng nhập:</td>
+            <td><input type="email" name="email" required placeholder="Nhập email"></td>
+        </tr>
 
-            <tr>
-                <td>Mật khẩu:</td>
-                <td><input type="password" name="password" required placeholder="Nhập mật khẩu"></td>
-            </tr>
+        <tr>
+            <td>Mật khẩu:</td>
+            <td><input type="password" name="password" required placeholder="Nhập mật khẩu"></td>
+        </tr>
+    </table><br>
 
-            <tr>
-                <td>Vai trò:</td>
-                <td>
-                    <select name="role">
-                        <option value="1">khách hàng </option>
-                        <option value="0">Admin</option>
-                    </select>
-                </td>
-            </tr>
-        </table><br>
-
-        <button type="submit" name="dangnhap">Đăng nhập</button>
-        <span><?= $loi ?? '' ?></span>
-        <a href="?act=dangky">Đăng ký tài khoản</a>
-    </form>
+    <button type="submit" name="dangnhap">Đăng nhập</button>
+    <span><?= $loi ?? '' ?></span>
+    <a href="?act=dangky">Đăng ký tài khoản</a>
+</form>
 </body>
 </html>
